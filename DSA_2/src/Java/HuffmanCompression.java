@@ -1,3 +1,5 @@
+package Java;
+
 import java.util.PriorityQueue;
 import java.util.HashMap;
 
@@ -86,8 +88,6 @@ public class HuffmanCompression {
     }
 
     public static void main(String[] args) {
-        System.out.println("Enter message to send");
-        String promptMessage = "";
         String message = "Hello, world!";
         System.out.println("Original message: " + message);
 
