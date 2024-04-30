@@ -23,8 +23,15 @@ public class Star {
             // Add the client to the connected clients map
             connectedClients.put(clientID, newClient);
             centralServer.connectClient(newClient);
+
+            // Troubleshooting logs
+            System.out.println("Client '" + clientID + "' has been successfully added to the network.");
+        } else {
+            // Troubleshooting logs if client already exists
+            System.out.println("Error: Client '" + clientID + "' is already connected to the network.");
         }
     }
+
 
     // Method to delete a client node from the network
     public void deleteNode(String clientID) {

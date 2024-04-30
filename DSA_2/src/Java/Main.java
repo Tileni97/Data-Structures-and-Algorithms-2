@@ -2,6 +2,7 @@ package Java;
 
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Set;
 
 public class Main {
     public static ArrayList<String> names = new ArrayList<>();
@@ -31,13 +32,17 @@ public class Main {
             System.out.println("Client '" + clientName + "' has been successfully added.");
         }
 
-// Send messages from one client to another and print out the received messages
-    System.out.println("Clients Names: ");
-    int size = starNetwork.getConnectedClients().size();
 
-    for(int j =0; j<size; j++){
-        System.out.print(starNetwork.getConnectedClients().get(j));
-    }
+        System.out.println("Clients Names: ");
+
+// Get the keys (client IDs) from the connectedClients map
+        Set<String> clientIDs = starNetwork.getConnectedClients().keySet();
+
+// Print the client IDs
+        for (String clientID : clientIDs) {
+            System.out.println(clientID);
+        }
+
         for (int i = 0; i <= numClients; i++) {
 
             System.out.println("Enter sender name: ");
