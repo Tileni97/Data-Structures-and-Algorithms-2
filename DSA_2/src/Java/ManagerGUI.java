@@ -4,7 +4,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -166,7 +165,7 @@ class ServerGUI {
     }
 }
 
-public class ClientGUI {
+/*public class ClientGUI {
     private static JTextArea decodedMessagesTextArea = new JTextArea();
     private static JTextField composeMessageTextField = new JTextField();
     private static List<String> sentMessages = new ArrayList<>();  // Corrected declaration
@@ -220,4 +219,4 @@ public class ClientGUI {
     private static void sendMessageToAllClients(List<String> messages) { // Corrected parameter type
         // Implement sending message to all connected clients
     }
-}
+}*/
