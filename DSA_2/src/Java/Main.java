@@ -1,36 +1,56 @@
 package Java;
 
+import java.util.Scanner;
+
 public class Main {
 
     public static void main(String[] args) {
-        // Create a star network with a central server named "CentralServer"
-        Star starNetwork = new Star("CentralServer");
+        Scanner scanner = new Scanner(System.in);
 
-        // Insert client nodes into the network
-        starNetwork.insertNode("Client1");
-        starNetwork.insertNode("Client2");
-        starNetwork.insertNode("Client3");
+        // Prompt user to enter the server name
+        System.out.print("Enter the name of the central server: ");
+        String serverName = scanner.nextLine();
 
-        // Get a reference to the connected clients map for monitoring
-        System.out.println("Connected Clients: " + starNetwork.getConnectedClients());
+        // Create a star network with the provided server name
+        Star starNetwork = new Star(serverName);
+        System.out.println("Central server named '" + serverName + "' has been successfully added.");
 
-        // Send messages between client nodes
-        ClientNode client1 = starNetwork.getConnectedClients().get("Client1");
-        ClientNode client2 = starNetwork.getConnectedClients().get("Client2");
-        ClientNode client3 = starNetwork.getConnectedClients().get("Client3");
+        // Prompt user to enter the number of clients to add
+        System.out.print("Enter the number of clients to add: ");
+        int numClients = scanner.nextInt();
+        scanner.nextLine(); // Consume newline
 
-        // Send messages from client1 to client2 and client3
-        client1.send("Client2", "Hello from Client1 to Client2");
-        client1.send("Client3", "Hello from Client1 to Client3");
+        // Add clients to the network
+        for (int i = 1; i <= numClients; i++) {
+            System.out.print("Enter the name of client " + i + ": ");
+            String clientName = scanner.nextLine();
+            starNetwork.insertNode(clientName);
+            System.out.println("Client '" + clientName + "' has been successfully added.");
+        }
 
-        // Receive messages for client2 and client3
-        System.out.println("Messages received by Client2: " + client2.receive());
-        System.out.println("Messages received by Client3: " + client3.receive());
+// Send messages from one client to another and print out the received messages
+        for (int i = 1; i <= numClients; i++) {
+            String senderName = "Client" + i;
+            String receiverName = (i == numClients) ? "Client1" : "Client" + (i + 1);
 
-        // Delete a client node from the network
-        starNetwork.deleteNode("Client3");
+            ClientNode sender = starNetwork.getConnectedClients().get(senderName);
+            ClientNode receiver = starNetwork.getConnectedClients().get(receiverName);
 
-        // Get a reference to the updated connected clients map for monitoring
-        System.out.println("Connected Clients after deletion: " + starNetwork.getConnectedClients());
+            if (sender != null && receiver != null) {
+                // Prompt user to enter the message
+                System.out.print("Enter the message to send from " + senderName + " to " + receiverName + ": ");
+                String message = scanner.nextLine();
+                sender.send(receiverName, message); // Send the user-entered message
+
+                // Receive message
+                String receivedMessage = receiver.receive();
+                System.out.println("Message received by " + receiverName + ": " + receivedMessage);
+            } else {
+                System.out.println("Error: Sender or receiver not found.");
+            }
+        }
+
+
+        scanner.close();
     }
 }
