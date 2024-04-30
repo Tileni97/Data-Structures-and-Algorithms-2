@@ -11,6 +11,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
         // Prompt user to enter the server name
+        System.out.println("\n\n");
         System.out.print("Enter the name of the central server: ");
         String serverName = scanner.nextLine();
 
@@ -25,6 +26,7 @@ public class Main {
 
         // Add clients to the network
         for (int i = 1; i <= numClients; i++) {
+            System.out.println("\n\n");
             System.out.print("Enter the name of client " + i + ": ");
             String clientName = scanner.nextLine();
             names.add(clientName);
@@ -32,7 +34,7 @@ public class Main {
             //System.out.println("Client '" + clientName + "' has been successfully added.");
         }
 
-
+        System.out.println("\n\n");
         System.out.println("Clients Names: ");
 
 // Get the keys (client IDs) from the connectedClients map
@@ -45,6 +47,7 @@ public class Main {
 
         for (int i = 0; i <= numClients; i++) {
 
+            System.out.println("\n\n");
             System.out.println("Enter sender name: ");
             String senderName = scanner.nextLine();
             System.out.println("Enter receiver name: ");
@@ -55,16 +58,21 @@ public class Main {
 
             if (sender != null && receiver != null) {
                 // Prompt user to enter the message
+                System.out.println("\n\n");
                 System.out.print("Enter the message to send from " + senderName + " to " + receiverName + ": ");
                 String message = scanner.nextLine();
 
+                // compressing the message
                 String compressedMessage = HuffmanCompression.compress(message);
 
                 sender.send(receiverName, compressedMessage); // Send the user-entered message
-
-                // Receive message
-                String receivedMessage = receiver.receive();
-                System.out.println("Message received by " + receiverName + ": " + receivedMessage);
+                System.out.println("\n\n\n");
+                
+                // Decode the encoded message
+                //String receivedMessage = receiver.receive();
+                String decodedMessage = HuffmanCompression.decompress(compressedMessage, HuffmanCompression.decOrigin(message));
+                
+                System.out.println("Received Message: \nFrom: "+senderName+" \nTo: " + receiverName + "\nMessage: " +decodedMessage);
             } else {
                 System.out.println("Error: Sender or receiver not found.");
             }

@@ -3,7 +3,7 @@ package Java;
 import java.util.PriorityQueue;
 import java.util.HashMap;
 
-public class HuffmanCompression {
+public class HuffmanCompression  {
 
     // Node class for constructing Huffman tree
     static class Node implements Comparable<Node> {
@@ -87,12 +87,37 @@ public class HuffmanCompression {
         return compressedMessage.toString();
     }
 
-    public static void main(String[] args) {
-        String message = "Hello, world!";
-        System.out.println("Original message: " + message);
+    // Method to decompress a Huffman-encoded message
+    public static String decompress(String compressedMessage, Node root) {
+        StringBuilder decompressedMessage = new StringBuilder();
+        Node currentNode = root;
 
-        String compressedMessage = compress(message);
-        System.out.println("Compressed message: " + compressedMessage);
+        for (char bit : compressedMessage.toCharArray()) {
+            if (bit == '0') {
+                currentNode = currentNode.left;
+            } else if (bit == '1') {
+                currentNode = currentNode.right;
+            }
+
+            // If it's a leaf node, append the character to the decompressed message and reset currentNode to root
+            if (currentNode.left == null && currentNode.right == null) {
+                decompressedMessage.append(currentNode.character);
+                currentNode = root;
+            }
+        }
+
+        return decompressedMessage.toString();
     }
-}
 
+    public static Node decOrigin(String word){
+        HashMap<Character, Integer> frequencyMap = new HashMap<>();
+        for (char c : word.toCharArray()) {
+            frequencyMap.put(c, frequencyMap.getOrDefault(c, 0) + 1);
+        }
+
+        // Build Huffman tree
+        Node root = buildHuffmanTree(frequencyMap);
+        return root;
+    }
+
+}
