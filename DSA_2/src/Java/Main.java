@@ -16,7 +16,7 @@ public class Main {
 
         // Create a star network with the provided server name
         Star starNetwork = new Star(serverName);
-        System.out.println("Central server named '" + serverName + "' has been successfully added.");
+        //System.out.println("Central server named '" + serverName + "' has been successfully added.");
 
         // Prompt user to enter the number of clients to add
         System.out.print("Enter the number of clients to add: ");
@@ -29,7 +29,7 @@ public class Main {
             String clientName = scanner.nextLine();
             names.add(clientName);
             starNetwork.insertNode(clientName);
-            System.out.println("Client '" + clientName + "' has been successfully added.");
+            //System.out.println("Client '" + clientName + "' has been successfully added.");
         }
 
 

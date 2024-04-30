@@ -12,6 +12,7 @@ public class Star {
     public Star(String serverName) {
         centralServer = new ServerNode(serverName);
         connectedClients = new HashMap<>();
+        System.out.println("Central server named '" + serverName + "' has been successfully added.");
     }
 
     // Method to add a client node to the network
