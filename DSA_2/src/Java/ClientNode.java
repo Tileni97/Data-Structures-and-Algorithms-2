@@ -16,6 +16,10 @@ public class ClientNode {
         // Send message to the server
         try {
             server.sendMessage(clientID, receiverID, message);
+
+            System.out.println("Message send: ");
+            System.out.println("From: "+clientID+"\nTo: "+receiverID+"\nMessage: "+message);
+
         } catch (IllegalArgumentException e) {
             // Log error if receiver is not connected to the network
             System.out.println("Error: " + e.getMessage());

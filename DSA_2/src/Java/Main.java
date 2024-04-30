@@ -52,7 +52,10 @@ public class Main {
                 // Prompt user to enter the message
                 System.out.print("Enter the message to send from " + senderName + " to " + receiverName + ": ");
                 String message = scanner.nextLine();
-                sender.send(receiverName, message); // Send the user-entered message
+
+                String compressedMessage = HuffmanCompression.compress(message);
+
+                sender.send(receiverName, compressedMessage); // Send the user-entered message
 
                 // Receive message
                 String receivedMessage = receiver.receive();
