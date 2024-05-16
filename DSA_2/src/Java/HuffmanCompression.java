@@ -48,6 +48,7 @@ public class HuffmanCompression  {
     }
 
     // Method to generate Huffman codes
+    // recursively traverse the Huffman tree and store the codes in a HashMap
     public static void generateHuffmanCodes(Node root, String code, HashMap<Character, String> huffmanCodes) {
         if (root == null) return;
 
